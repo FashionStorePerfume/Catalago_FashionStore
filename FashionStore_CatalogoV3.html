@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fashion Store Perfumes</title>
+  <style>
+    body {
+      background-color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #000;
+    }
+
+    /* NUEVA SECCIÓN SUPERIOR */
+    .top-bar {
+      background: linear-gradient(90deg, #bfa046, #ffde59);
+      color: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 30px;
+      flex-wrap: wrap;
+      font-weight: bold;
+      font-size: 1.1rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .top-bar .eslogan {
+      font-family: 'Arial Black', Gadget, sans-serif;
+      font-size: 1.4rem;
+      color: #3a1a00;
+      flex: 1 1 100%;
+      text-align: center;
+      margin-bottom: 8px;
+      text-shadow: 1px 1px 1px #fff;
+    }
+    .top-bar .info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      flex: 1 1 100%;
+      font-size: 1rem;
+      color: #3a1a00;
+      text-shadow: 0.5px 0.5px 0.5px #fff;
+    }
+    .top-bar .info div {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 180px;
+      background: rgba(255 255 255 / 0.7);
+      border-radius: 6px;
+      padding: 6px 10px;
+      box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+    }
+    .top-bar img.logo {
+      height: 100px;
+      margin-right: 20px;
+      flex-shrink: 0;
+    }
+
+    /* HEADER ORIGINAL */
+    header {
+      text-align: center;
+      padding: 40px 20px 10px;
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      font-weight: bold;
+      color: #000;
+    }
+
+    header h2 {
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #444;
+      margin-top: 10px;
+    }
+
+    /* CATÁLOGO */
+    .catalogo {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+.envio-promocion {
+  background: #ffde59;
+  color: #3a1a00;
+  font-weight: 900;
+  text-align: center;
+  padding: 12px 20px;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  margin: 15px auto;
+  max-width: 1100px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+  letter-spacing: 0.02em;
+}
+.destacado-envio {
+  color: #bfa046;
+  text-transform: uppercase;
+  font-size: 1.3rem;
+}
+
+/* --- FILTROS --- */
+    .filtros-categorias {
+      text-align: center;
+      margin: 30px auto 10px;
+    }
+    .filtros-categorias button {
+      background-color: #bfa046;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      margin: 5px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: background-color 0.3s;
+    }
+    .filtros-categorias button:hover {
+      background-color: #a88938;
+    }
+    .producto {
+      max-width: 300px;
+      margin: 0 auto;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s;
+    }
+.producto {
+  position: relative; /* necesario para posicionar la etiqueta */
+  overflow: hidden;
+}
+
+.etiqueta-agotado {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: rgba(255, 0, 0, 0.85);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  z-index: 10;
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+  text-transform: uppercase;
+}
+.etiqueta-envio {
+  position: absolute;
+  top: 10px;
+  left: 50%; /* centrado horizontal */
+  transform: translateX(-50%); /* centrado ajustado */
+  background-color: #bfa046;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  z-index: 10;
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+  text-transform: uppercase;
+  animation: pulse 1.5s infinite;
+}
+
+/* Animación de pulso */
+@keyframes pulse {
+  0% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(1.08); }
+  100% { transform: translateX(-50%) scale(1); }
+}
+.etiqueta-lanzamiento {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(45deg, #ff004c, #ff6a00);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  z-index: 10;
+  text-transform: uppercase;
+  box-shadow: 1px 1px 8px rgba(0,0,0,0.2);
+  animation: pulse 1.5s infinite;
+}
+
+/* Animación para llamar la atención */
+@keyframes pulse {
+  0% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(1.08); }
+  100% { transform: translateX(-50%) scale(1); }
+}
+    .producto:hover {
+      transform: scale(1.02);
+    }
+
+    .producto img {
+      width: 100%;
+      height: auto;
+      max-height: 250px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .producto h3 {
+      font-size: 1.1em;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #000;
+      margin-bottom: 10px;
+    }
+
+    .opciones, .notas {
+      font-size: 0.95em;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .destacado {
+      color: #bfa046;
+      font-weight: bold;
+    }
+
+    .btn-whatsapp {
+      background-color: #25d366;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 12px;
+    }
+
+    .btn-whatsapp:hover {
+      background-color: #1ebe5d;
+    }
+
+    @media (min-width: 992px) {
+      .catalogo {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .top-bar {
+        justify-content: start;
+      }
+      .top-bar .eslogan {
+        flex: 0 0 auto;
+        text-align: left;
+        margin-bottom: 0;
+      }
+      .top-bar .info {
+        flex: 1 1 auto;
+        justify-content: flex-end;
+      }
+    }
+.carrito {
+  position: fixed;
+  right: 20px;
+  top: 100px;
+  background: #f8f8f8;
+  border: 2px solid #bfa046;
+  padding: 15px;
+  border-radius: 8px;
+  width: 280px;
+  max-height: 70vh;
+  overflow-y: auto;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  z-index: 999;
+}
+.toggle-carrito {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #bfa046;
+  color: white;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+.toggle-carrito:hover {
+  background-color: #a88938;
+}
+.carrito h3 {
+  margin-top: 0;
+  color: #3a1a00;
+}
+.btn-finalizar {
+  background: #25d366;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  display: block;
+  width: 100%;
+  margin-top: 15px;
+  text-align: center;
+  text-decoration: none;
+}
+.btn-finalizar:hover {
+  background: #1ebe5d;
+}
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <img src="https://media-mty2-1.cdn.whatsapp.net/v/t61.24694-24/514485800_1894496768036191_2819527431329943197_n.jpg?ccb=11-4&oh=01_Q5Aa2AECCrdQmgtcvtiWBK6rnjn6hzCSpBC1rfulOyrLj8JHVA&oe=68860713&_nc_sid=5e03e0&_nc_cat=105" alt="Logo Fashion Store" class="logo" />
+    <div class="eslogan">¡Descubre el aroma que marca tu estilo!</div>
+    <div class="info">
+      <div>🔝 Promociones nuevas cada semana 🔝</div>
+      <div>🚚 Costos de envíos nacionales desde $120</div>
+      <div>🎁Envío gratis Incluyen 1 decant de regalo🎁</div>
+      <div>💳 Pagos con tarjeta y MSI</div>
+      <div>🔗 Links de pago seguros</div>
+<div class="envio-promocion">
+  🚀 **¡Compra más y ahorra en envío!**🚀  
+  <span class="destacado-envio">Decant envío gratis en compras desde 6 piezas</span> y disfruta de tus fragancias favoritas sin costo adicional.  
+  ¿Buscas piezas completas? ¡Envío gratis garantizado desde $799!  
+</div>
+    </div>
+  </div>
+
+  <header>
+    <h1>Fashion Store Perfumes</h1>
+    <h2>Venta de piezas y decants originales árabes y diseñador</h2>
+  </header>
+
+<!-- FILTROS DE CATEGORÍA -->
+  <div class="filtros-categorias">
+    <button onclick="filtrarProductos('todos')">🌟 Todos</button>
+    <button onclick="filtrarProductos('arabes')">💠 Árabes</button>
+    <button onclick="filtrarProductos('diseñador')">⭐ Diseñador</button>
+    <button onclick="filtrarProductos('femeninos')">🌸 Femeninos</button>
+    <button onclick="filtrarProductos('masculinos')">👔 Masculinos</button>
+    <button onclick="filtrarProductos('body')">💞 Body</button>
+  </div>
+
+  <section class="catalogo">
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto arabes femeninos">
+<div class="etiqueta-envio">Pieza completa ¡Envío Gratis!</div>
+      <img src="https://cdn.fragrancenet.com/images/photos/900x900/299207.jpg" alt="AFNAN SUPREMACY PINK WOMAN" />
+      <h3>AFNAN SUPREMACY PINK WOMAN</h3>
+      <div class="opciones">
+        <p>* Decant 5ml a solo <span class="destacado">$60.00</span></p>
+        <p>* Decant 10ml a solo <span class="destacado">$100.00</span></p>
+        <p>* Pieza completa desde <span class="destacado">$799.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong> Pimienta rosa, Violeta, Rosa, Peonía, Muguet, Ámbar y Almizcle</p>
+        <p><strong>Proyección:</strong> Muy buena (6-7 hr)</p>
+        <p><strong>Dupe:</strong> Estilo Propio &gt;</p>
+      </div>
+      <select class="variante">
+  <option value="Decant 5ml - $60">Decant 5ml - $60</option>
+  <option value="Decant 10ml - $100">Decant 10ml - $100</option>
+  <option value="Pieza completa - $799">Pieza completa - $799</option>
+</select>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('AFNAN SUPREMACY PINK WOMAN', this)">Agregar al carrito</button>
+    </div>
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto arabes femeninos">
+<div class="etiqueta-envio">Pieza completa ¡Envío Gratis!</div>
+      <img src="https://orioudh.com/cdn/shop/files/arabian-perfume-afnan-supremacy-purple-100ml-eau-de-parfum-afnan-307332-51370441310539.jpg?v=1724768293&width=490" alt="AFNAN SUPREMACY PURPLE WOMAN" />
+      <h3>AFNAN SUPREMACY PURPLE WOMAN</h3>
+      <div class="opciones">
+        <p>* Decant 5ml a solo <span class="destacado">$60.00</span></p>
+        <p>* Decant 10ml a solo <span class="destacado">$100.00</span></p>
+        <p>* Pieza completa desde <span class="destacado">$799.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong> Naranja, Bergamota, Melocotón, Ámbar, Almizcle blanco, Pera, Almizcle, Vainilla  </p>
+        <p><strong>Proyección:</strong> Muy buena (6-8 hr)</p>
+        <p><strong>Dupe:</strong> Estilo Propio &gt;</p>
+      </div>
+      <select class="variante">
+  <option value="Decant 5ml - $60">Decant 5ml - $60</option>
+  <option value="Decant 10ml - $100">Decant 10ml - $100</option>
+  <option value="Pieza completa - $799">Pieza completa - $799</option>
+</select>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('AFNAN SUPREMACY PURPLE WOMAN', this)">Agregar al carrito</button>
+    </div>
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto arabes masculinos">
+<div class="etiqueta-envio">Pieza completa ¡Envío Gratis!</div>
+      <img src="https://th.bing.com/th/id/R.c7e47115d81b793a136fda985ccb8741?rik=SSWH78LLGdXodA&riu=http%3a%2f%2fprivateblends.com.au%2fcdn%2fshop%2fproducts%2fshaheen-silver--lattafa-pride-middle-eastern-scents-private-blends-australia_a1775810-781b-447d-9b40-3cfdef09ddb6.jpg%3fv%3d1678419339%26width%3d2048&ehk=B2VC7jt5QWEtCQbmwQGfNbZqg7vmMIq3%2fo1NiKmV5Mc%3d&risl=&pid=ImgRaw&r=0" alt="LATTAFA PRIDE SHAHEEN SILVER" />
+      <h3>LATTAFA PRIDE SHAHEEN SILVER</h3>
+      <div class="opciones">
+        <p>* Decant 5ml a solo <span class="destacado">$65.00</span></p>
+        <p>* Decant 10ml a solo <span class="destacado">$115.00</span></p>
+        <p>* Pieza completa desde <span class="destacado">$899.00.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong> Bergamota, cassis (grosella negra), Patchouli, rosa aromatic, Ámbar, almizcle, roble musgo (oakmoss)</p>
+        <p><strong>Proyección:</strong> Excelente (8-12 hr)</p>
+        <p><strong>Dupe:</strong> Aventus de Creed &gt; +85% </p>
+      </div>
+      <select class="variante">
+  <option value="Decant 5ml - $65">Decant 5ml - $65</option>
+  <option value="Decant 10ml - $115">Decant 10ml - $115</option>
+  <option value="Pieza completa - $799">Pieza completa - $799</option>
+</select>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('LATTAFA PRIDE SHAHEEN SILVER', this)">Agregar al carrito</button>
+    </div>
+
+    <!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto arabes masculinos">
+      <img src="https://cdn2.jomashop.com/media/catalog/product/cache/0ee3019724ce73007b606b54ba535a23/a/f/afnan-ladies-9am-edp-34-oz-fragrances-6290171002345.jpg?height=546&width=546" alt="AFNAN 9AM" />
+      <h3>AFNAN 9AM</h3>
+      <div class="opciones">
+        <p>* Decant 5ml a solo <span class="destacado">$65.00</span></p>
+        <p>* Decant 10ml a solo <span class="destacado">$120.00</span></p>
+        <p>* Pieza completa desde <span class="destacado">No Disponible</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong> Limón, mandarina, pimienta rosa, cardamomo, Manzana verde, lavanda, flor de azahar, rosa, Cedro, musgo, almizcle y pachulí </p>
+        <p><strong>Proyección:</strong> Muy buena (8–10 hr)</p>
+        <p><strong>Dupe:</strong> Estilo Propio &gt;</p>
+      </div>
+      <select class="variante">
+  <option value="Decant 5ml - $65">Decant 5ml - $65</option>
+  <option value="Decant 10ml - $120">Decant 10ml - $120</option>
+  <option value="Pieza completa - ">Pieza completa - Sin Stock </option>
+</select>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('AFNAN 9AM', this)">Agregar al carrito</button>
+    </div>
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto arabes femeninos">
+<div class="etiqueta-envio">Pieza completa ¡Envío Gratis!</div>
+      <img src="https://www.khanelkhaliliusa.com/cdn/shop/files/61sZMF3YQqL._AC_UF1000_1000_QL80_1537f495-2b81-46bf-98d1-b625912d4970.jpg?v=1694618300" alt="LATTAFA YARA TOUS" />
+      <h3>LATTAFA YARA TOUS</h3>
+      <div class="opciones">
+        <p>* Decant 5ml a solo <span class="destacado">$75.00</span></p>
+        <p>* Decant 10ml a solo <span class="destacado">$140.00</span></p>
+        <p>* Pieza completa desde <span class="destacado">$1,100.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong> Coco, mango, maracuyá,Jazmín, heliotropo, flor de azahar, Vainilla, cashmeran, almizcle </p>
+        <p><strong>Proyección:</strong> Muy buena (6–8 hr)</p>
+        <p><strong>Dupe:</strong> Estilo Propio &gt; </p>
+      </div>
+      <select class="variante">
+  <option value="Decant 5ml - $75">Decant 5ml - $60</option>
+  <option value="Decant 10ml - $140">Decant 10ml - $100</option>
+  <option value="Pieza completa - $1,100">Pieza completa - $1,100</option>
+</select>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('LATTAFA YARA TOUS', this)">Agregar al carrito</button>
+    </div>
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto arabes masculinos">
+      <img src="https://i5.walmartimages.com/seo/Afnan-9pm-by-Afnan-Eau-De-Parfum-Spray-Unisex-3-4-oz-for-Men_ce65e668-65af-4a2c-bc6c-58ddc3185e29.cecf8f12456d5d34e366350588376578.jpeg" alt="AFNAN 9PM" />
+<div class="etiqueta-lanzamiento">Próximamente</div>
+      <h3>AFNAN 9PM</h3>
+      <div class="opciones">
+        <p>* Decant 5ml a solo <span class="destacado">$55.00</span></p>
+        <p>* Decant 10ml a solo <span class="destacado">$100.00</span></p>
+        <p>* Pieza completa desde <span class="destacado">$790.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong> Manzana caramelizada, lavanda, cítricos, Vainilla, canela, flor de azahar, Almizcle, pachulí, ámbar </p>
+        <p><strong>Proyección:</strong> Excelente (8-12 hr)</p>
+        <p><strong>Dupe:</strong> JPG Ultra Male &gt; +90% </p>
+      </div>
+      <select class="variante">
+  <option value="Decant 5ml - $55">Decant 5ml - $55</option>
+  <option value="Decant 10ml - $100">Decant 10ml - $100</option>
+  <option value="Pieza completa - $790">Pieza completa - $790</option>
+</select>
+
+<button class="btn-whatsapp" disabled style="opacity: 0.5; cursor: not-allowed;">Agotado</button>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('AFNAN 9PM', this)">Agregar al carrito</button>
+    </div>
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto arabes femeninos">
+      <img src="https://cdn.fragrancenet.com/images/photos/1600x1600/298259.jpg" alt="CLUB DE NUIT WOMAN" />
+<div class="etiqueta-lanzamiento">Próximamente</div>
+      <h3>CLUB DE NUIT WOMAN</h3>
+      <div class="opciones">
+        <p>* Decant 5ml a solo <span class="destacado">$55.00</span></p>
+        <p>* Decant 10ml a solo <span class="destacado">$100.00</span></p>
+        <p>* Pieza completa desde <span class="destacado">$700.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong> Naranja, bergamota, toronja (pomelo), durazno (melocotón), Rosa, jazmín, geranio, lichi, Pachulí, vainilla, almizcle, vetiver</p>
+        <p><strong>Proyección:</strong> Muy buena (6-8 hr)</p>
+        <p><strong>Dupe:</strong> Chanel Coco Mademoiselle &gt; +85% </p>
+      </div>
+      <select class="variante">
+  <option value="Decant 5ml - $55">Decant 5ml - $55</option>
+  <option value="Decant 10ml - $100">Decant 10ml - $100</option>
+  <option value="Pieza completa - $700">Pieza completa - $700</option>
+</select>
+
+<button class="btn-whatsapp" disabled style="opacity: 0.5; cursor: not-allowed;">Agotado</button>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('CLUB DE NUIT WOMAN', this)">Agregar al carrito</button>
+    </div>
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto arabes masculinos">
+      <img src="https://fragrancewholesalerusa.com/cdn/shop/files/Untitleddesign_39.png?v=1746637949" alt="ARMAF CLUB DE NUIT MEN" />
+      <h3>ARMAF CLUB DE NUIT MEN</h3>
+      <div class="opciones">
+        <p>* Decant 5ml a solo <span class="destacado">$50.00</span></p>
+        <p>* Decant 10ml a solo <span class="destacado">$90.00</span></p>
+        <p>* Pieza completa desde <span class="destacado">$760.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong> Mandarina, toronja (pomelo), menta, Canela, clavos de olor, jengibre, pimienta, Ámbar, notas especiadas, cuero, pachulí, notas amaderadas</p>
+        <p><strong>Proyección:</strong> Muy buena (6-8 hr)</p>
+        <p><strong>Dupe:</strong> Creed Aventus &gt; +75% </p>
+      </div>
+      <select class="variante">
+  <option value="Decant 5ml - $50">Decant 5ml - $50</option>
+  <option value="Decant 10ml - $90">Decant 10ml - $90</option>
+  <option value="Pieza completa - $760">Pieza completa - $760</option>
+</select>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('ARMAF CLUB DE NUIT MEN', this)">Agregar al carrito</button>
+    </div>
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto diseñador femenino">
+      <img src="https://th.bing.com/th/id/OIP.QkxvB_Z1I3N_X3_VAY6EKAHaD4?w=338&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="GUESS SEDUCTIVE KISS WOMAN" />
+      <h3>GUESS SEDUCTIVE KISS WOMAN</h3>
+      <div class="opciones">
+        <p>* Decant 5ml a solo <span class="destacado">$50.00</span></p>
+        <p>* Decant 10ml a solo <span class="destacado">$90.00</span></p>
+        <p>* Pieza completa desde <span class="destacado">$735.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong> Pomelo, mandarina, hoja verde,Flor de durazno, jazmín, flores silvestres, Cedro, ámbar y almizcle</p>
+        <p><strong>Proyección:</strong> Muy buena (6-8 hr)</p>
+        
+      </div>
+      <select class="variante">
+  <option value="Decant 5ml - $50">Decant 5ml - $50</option>
+  <option value="Decant 10ml - $90">Decant 10ml - $90</option>
+  <option value="Pieza completa - $735">Pieza completa - $735</option>
+</select>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('GUESS SEDUCTIVE KISS WOMAN', this)">Agregar al carrito</button>
+    </div>
+
+<div class="producto diseñador masculino">
+      <img src="https://m.media-amazon.com/images/I/61SiAm01zpL._UF1000%2C1000_QL80_.jpg" alt="GUESS SEDUCTIVE BLUE MEN" />
+<div class="etiqueta-agotado">Agotado</div>
+      <h3>GUESS SEDUCTIVE BLUE MEN</h3>
+      <div class="opciones">
+        <p>* Decant 5ml a solo <span class="destacado">$55.00</span></p>
+        <p>* Decant 10ml a solo <span class="destacado">$100.00</span></p>
+        <p>* Pieza completa desde <span class="destacado">$840.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong> Cardamomo, pimienta negra, cítricos, lima caviar, acordes marinos (Blue Coral / AquaSpace), geranio, Cashmere wood, musgo, arena</p>
+        <p><strong>Proyección:</strong> Buena (4-6 hr)</p>
+        
+      </div>
+      <select class="variante">
+  <option value="Decant 5ml - $55">Decant 5ml - $55</option>
+  <option value="Decant 10ml - $100">Decant 10ml - $100</option>
+  <option value="Pieza completa - $840">Pieza completa - $840</option>
+</select>
+<button class="btn-whatsapp" disabled style="opacity: 0.5; cursor: not-allowed;">Agotado</button>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('GUESS SEDUCTIVE BLUE MEN', this)">Agregar al carrito</button>
+    </div>
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto diseñador femenino">
+      <img src="https://m.media-amazon.com/images/I/71KTtuch3AL._UF1000%2C1000_QL80_.jpg" alt="GUESS SEDUCTIVE WOMAN" />
+      <h3>GUESS SEDUCTIVE WOMAN</h3>
+      <div class="opciones">
+        <p>* Decant 5ml a solo <span class="destacado">$45.00</span></p>
+        <p>* Decant 10ml a solo <span class="destacado">$85.00</span></p>
+        <p>* Pieza completa desde <span class="destacado">$690.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong>Pera, bergamota, grosella negra,jazmín, flor de naranja africana, raíz de lirio, vainilla, madera de cachemiro olíbano</p>
+        <p><strong>Proyección:</strong> Muy buena (5-6 hr)</p>
+        
+      </div>
+      <select class="variante">
+  <option value="Decant 5ml - $45">Decant 5ml - $45</option>
+  <option value="Decant 10ml - $85">Decant 10ml - $85</option>
+  <option value="Pieza completa - $690">Pieza completa - $690</option>
+</select>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('GUESS SEDUCTIVE WOMAN', this)">Agregar al carrito</button>
+    </div>
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto diseñador masculino">
+<div class="etiqueta-envio">Pieza completa ¡Envío Gratis!</div>
+      <img src="https://m.media-amazon.com/images/I/51QuV7iv7sL._UF1000%2C1000_QL80_.jpg" alt="HALLOWEEN MAN" />
+      <h3>HALLOWEEN MAN</h3>
+      <div class="opciones">
+        <p>* Decant 5ml a solo <span class="destacado">$75.00</span></p>
+        <p>* Decant 10ml a solo <span class="destacado">$135.00</span></p>
+        <p>* Pieza completa desde <span class="destacado">$1,189.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong>Hoja de violeta, martini, albahaca, mandarina, lavanda, flor de azahar, canela, jengibre, Ámbar gris, vainilla, cuero, almizcle</p>
+        <p><strong>Proyección:</strong> Muy buena (5-6 hr)</p>
+        
+      </div>
+      <select class="variante">
+  <option value="Decant 5ml - $75">Decant 5ml - $75</option>
+  <option value="Decant 10ml - $135">Decant 10ml - $135</option>
+  <option value="Pieza completa - $1,189">Pieza completa - $1,189</option>
+</select>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('HALLOWEEN MAN', this)">Agregar al carrito</button>
+    </div>
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto arabes masculinos">
+      <img src="https://m.media-amazon.com/images/I/61aYG2haQlL._UF1000%2C1000_QL80_.jpg" alt="LATTAFA ASAD ZANZIBAR MEN" />
+      <h3>LATTAFA ASAD ZANZIBAR MEN</h3>
+      <div class="opciones">
+        <p>* Decant 5ml a solo <span class="destacado">$50.00</span></p>
+        <p>* Decant 10ml a solo <span class="destacado">$90.00</span></p>
+        <p>* Pieza completa desde <span class="destacado">$690.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong> Pimienta negra, lavanda marítima, agua de coco salada, iris, vainilla e incienso  </p>
+        <p><strong>Proyección:</strong> Muy buena (6-8 hr)</p>
+        <p><strong>Dupe:</strong> Estilo propio </p>
+      </div>
+      <select class="variante">
+  <option value="Decant 5ml - $50">Decant 5ml - $50</option>
+  <option value="Decant 10ml - $90">Decant 10ml - $90</option>
+  <option value="Pieza completa - $690">Pieza completa - $690</option>
+</select>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('LATTAFA ASAD ZANZIBAR MEN', this)">Agregar al carrito</button>
+    </div>
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto diseñador masculino">
+<div class="etiqueta-envio">Pieza completa ¡Envío Gratis!</div>
+      <img src="https://www.bing.com/th?id=OPHS.ZJpVBedgk4Yttg474C474&o=5&pid=21.1&w=148&h=196&qlt=100&dpr=1.3&o=2&bw=6&bc=FFFFFF" alt="RALF LAUREN POLO BLACK MEN" />
+      <h3>RALF LAUREN POLO BLACK MEN</h3>
+      <div class="opciones">
+        <p>* Decant 5ml a solo <span class="destacado">$75.00</span></p>
+        <p>* Decant 10ml a solo <span class="destacado">$145.00</span></p>
+        <p>* Pieza completa desde <span class="destacado">$1,289.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong>Mango frío, mandarina, limón, cardamomo,acorde ozónico, jazmín, artemisa plateada, musgo, haba tonka, patchouli noir, cedro </p>
+        <p><strong>Proyección:</strong> Muy buena (5-6 hr)</p>
+        
+      </div>
+      <select class="variante">
+  <option value="Decant 5ml - $75">Decant 5ml - $75</option>
+  <option value="Decant 10ml - $145">Decant 10ml - $145</option>
+  <option value="Pieza completa - $1,289">Pieza completa - $1,289</option>
+</select>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('RALF LAUREN POLO BLACK MEN', this)">Agregar al carrito</button>
+    </div>
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto arabes masculinos">
+      <img src="https://img.fragrancex.com/images/products/parent/medium/78232m.jpg" alt="ODYSSEY BLACK MEN" />
+<div class="etiqueta-lanzamiento">Próximamente</div>
+
+      <h3>ODYSSEY BLACK MEN</h3>
+      <div class="opciones">
+        <p>* Decant 5ml a solo <span class="destacado">$60.00</span></p>
+        <p>* Decant 10ml a solo <span class="destacado">$105.00</span></p>
+        <p>* Pieza completa desde <span class="destacado">$880.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong> Vainilla, ámbar cálido, Iris, especias orientales, Cuero, jazmín y más vainilla</p>
+        <p><strong>Proyección:</strong> Excelente (6-10 hr)</p>
+        <p><strong>Dupe:</strong> Tom Ford Noir Extreme &gt; +85% </p>
+      </div>
+      <select class="variante">
+  <option value="Decant 5ml - $60">Decant 5ml - $60</option>
+  <option value="Decant 10ml - $105">Decant 10ml - $105</option>
+  <option value="Pieza completa - $880">Pieza completa - $880</option>
+</select>
+
+<button class="btn-whatsapp" disabled style="opacity: 0.5; cursor: not-allowed;">Agotado</button>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('ODYSSEY BLACK MEN', this)">Agregar al carrito</button>
+    </div>
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto arabes masculinos">
+      <img src="https://www.bhararabeauty.com/cdn/shop/files/200.jpg?v=1751483518&width=1946" alt="BHARARA KING" />
+<div class="etiqueta-lanzamiento">Próximamente</div>
+
+      <h3>BHARARA KING</h3>
+      <div class="opciones">
+        <p>* Decant 5ml a solo <span class="destacado">$90.00</span></p>
+        <p>* Decant 10ml a solo <span class="destacado">$165.00</span></p>
+        <p>* Pieza completa desde <span class="destacado">$1,405.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong> Naranja, bergamota, limón, Tutti‑frutti/frutas dulces con carácter jugoso, Vainilla, ámbar y almizcle blanco </p>
+        <p><strong>Proyección:</strong> Extrema (8-12 hr)</p>
+        <p><strong>Dupe:</strong> Estilo Propio </p>
+      </div>
+      <select class="variante">
+  <option value="Decant 5ml - $90">Decant 5ml - $90</option>
+  <option value="Decant 10ml - $165">Decant 10ml - $165</option>
+  <option value="Pieza completa - $1,405">Pieza completa - $1,405</option>
+</select>
+
+<button class="btn-whatsapp" disabled style="opacity: 0.5; cursor: not-allowed;">Agotado</button>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('BHARARA KING', this)">Agregar al carrito</button>
+    </div>
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto arabes masculinos">
+      <img src="https://redbagstore.com/cdn/shop/files/Stallion53FreeSamplePerfumebyEmperLuxury_AuthenticFragranceUnisexEauDeParfum3.4FlOz100ml_26bc365d-0259-404f-919d-267cfda9c6c5.webp?v=1726633967" alt="EMPER STALLION 53" />
+<div class="etiqueta-lanzamiento">Próximamente</div>
+
+      <h3>EMPER STALLION 53</h3>
+      <div class="opciones">
+        <p>* Decant 5ml a solo <span class="destacado">$50.00</span></p>
+        <p>* Decant 10ml a solo <span class="destacado">$90.00</span></p>
+        <p>* Pieza completa desde <span class="destacado">$650.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong> Violeta, cardamomo, Iris, ámbar, Sándalo, cedro de Virginia, cuero y papiro </p>
+        <p><strong>Proyección:</strong> Excelente (6-10 hr)</p>
+        <p><strong>Dupe:</strong> Santal 33 &gt; +90% </p>
+      </div>
+      <select class="variante">
+  <option value="Decant 5ml - $50">Decant 5ml - $50</option>
+  <option value="Decant 10ml - $90">Decant 10ml - $90</option>
+  <option value="Pieza completa - $650">Pieza completa - $650</option>
+</select>
+
+<button class="btn-whatsapp" disabled style="opacity: 0.5; cursor: not-allowed;">Agotado</button>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('EMPER STALLION 53', this)">Agregar al carrito</button>
+    </div>
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto arabes femeninos">
+      <img src="https://fimgs.net/mdimg/secundar/o.124869.jpg" alt="LATTAFA AFEEF UNISEX" />
+<div class="etiqueta-lanzamiento">Próximamente</div>
+
+      <h3>LATTAFA AFEEF UNISEX</h3>
+      <div class="opciones">
+        <p>* Decant 5ml a solo <span class="destacado">$65.00</span></p>
+        <p>* Decant 10ml a solo <span class="destacado">$115.00</span></p>
+        <p>* Pieza completa desde <span class="destacado">$920.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong> Durazno, pimienta rosa, bergamota, jazmín, nardo, flor de azahar del naranjo,praliné, sándalo, ámbar y pachulí</p>
+        <p><strong>Proyección:</strong> Muy buena (6-8 hr)</p>
+        <p><strong>Dupe:</strong> Xerjoff Erba Pura &gt; +85% </p>
+      </div>
+      <select class="variante">
+  <option value="Decant 5ml - $65">Decant 5ml - $65</option>
+  <option value="Decant 10ml - $115">Decant 10ml - $115</option>
+  <option value="Pieza completa - $920">Pieza completa - $920</option>
+</select>
+
+<button class="btn-whatsapp" disabled style="opacity: 0.5; cursor: not-allowed;">Agotado</button>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('LATTAFA AFEEF UNISEX', this)">Agregar al carrito</button>
+    </div>
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto arabes masculinos">
+      <img src="https://tse1.mm.bing.net/th/id/OIP.9OuqpFwceM3y6mG23NvPNwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="LATTAFA AL NOBLE SAFEER UNISEX" />
+<div class="etiqueta-lanzamiento">Próximamente</div>
+
+      <h3>LATTAFA AL NOBLE SAFEER UNISEX</h3>
+      <div class="opciones">
+        <p>* Decant 5ml a solo <span class="destacado">$45.00</span></p>
+        <p>* Decant 10ml a solo <span class="destacado">$80.00</span></p>
+        <p>* Pieza completa desde <span class="destacado">$600.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong> Artemisi, bergamota, pomelo, Mezcla de hierbas verdes, Madera de gaiac, enebro de Virginia, frutos secos, pachulí, incienso, ládano, comino, vainilla, almizcle, cashmere wood, ambergris, musgo negro </p>
+        <p><strong>Proyección:</strong> Muy buena (6-8 hr)</p>
+        <p><strong>Dupe:</strong> Initio Oud for Happiness &gt; +75% </p>
+      </div>
+      <select class="variante">
+  <option value="Decant 5ml - $45">Decant 5ml - $45</option>
+  <option value="Decant 10ml - $80">Decant 10ml - $80</option>
+  <option value="Pieza completa - $600">Pieza completa - $600</option>
+</select>
+
+<button class="btn-whatsapp" disabled style="opacity: 0.5; cursor: not-allowed;">Agotado</button>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('LATTAFA AL NOBLE SAFEER UNISEX', this)">Agregar al carrito</button>
+    </div>
+
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto arabes masculinos">
+      <img src="https://tse4.mm.bing.net/th/id/OIP.bU6QU50PXAk_l_-ZmjrKawHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="LATTAFA ASAD MEN" />
+<div class="etiqueta-lanzamiento">Próximamente</div>
+
+      <h3>LATTAFA ASAD MEN</h3>
+      <div class="opciones">
+        <p>* Decant 5ml a solo <span class="destacado">$55.00</span></p>
+        <p>* Decant 10ml a solo <span class="destacado">$95.00</span></p>
+        <p>* Pieza completa desde <span class="destacado">$750.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong> Pimienta negra, piña, tabaco,Café, iris, pachulí, Ámbar, vainilla, maderas secas, benjuí y ládano    </p>
+        <p><strong>Proyección:</strong> Excelente (6-10 hr)</p>
+        <p><strong>Dupe:</strong> Dior Sauvage Elixir &gt; +95% </p>
+      </div>
+      <select class="variante">
+  <option value="Decant 5ml - $55">Decant 5ml - $55</option>
+  <option value="Decant 10ml - $95">Decant 10ml - $95</option>
+  <option value="Pieza completa - $750">Pieza completa - $750</option>
+</select>
+
+<button class="btn-whatsapp" disabled style="opacity: 0.5; cursor: not-allowed;">Agotado</button>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('LATTAFA ASAD MEN', this)">Agregar al carrito</button>
+    </div>
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto arabes femeninos">
+      <img src="https://perfumesdelolimpo.com/wp-content/uploads/2023/10/Khamrah.jpeg" alt="LATTAFA KHAMRAH UNISEX" />
+<div class="etiqueta-lanzamiento">Próximamente</div>
+
+      <h3>LATTAFA KHAMRAH UNISEX</h3>
+      <div class="opciones">
+        <p>* Decant 5ml a solo <span class="destacado">$60.00</span></p>
+        <p>* Decant 10ml a solo <span class="destacado">$105.00</span></p>
+        <p>* Pieza completa desde <span class="destacado">$890.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong> Canela, nuez moscada, bergamota, Dátiles, praliné, tuberosa, Mahonia, Vainilla, haba tonka, mirra, benjuí, amberwood y Akigalawood </p>
+        <p><strong>Proyección:</strong> Muy buena (6-8 hr)</p>
+        <p><strong>Dupe:</strong> By Kilian Angels’ Share &gt; +85% </p>
+      </div>
+      <select class="variante">
+  <option value="Decant 5ml - $60">Decant 5ml - $60</option>
+  <option value="Decant 10ml - $105">Decant 10ml - $105</option>
+  <option value="Pieza completa - $890">Pieza completa - $890</option>
+</select>
+
+<button class="btn-whatsapp" disabled style="opacity: 0.5; cursor: not-allowed;">Agotado</button>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('LATTAFA KHAMRAH UNISEX', this)">Agregar al carrito</button>
+    </div>
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto arabes masculinos">
+      <img src="https://tse2.mm.bing.net/th/id/OIP.VDr22yX8D9iRBULQUUWSewHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="LATTAFA PRIDE ISHQ AL SHUYUKH GOLD" />
+<div class="etiqueta-lanzamiento">Próximamente</div>
+
+      <h3>LATTAFA PRIDE ISHQ AL SHUYUKH GOLD</h3>
+      <div class="opciones">
+        <p>* Decant 5ml a solo <span class="destacado">$55.00</span></p>
+        <p>* Decant 10ml a solo <span class="destacado">$90.00</span></p>
+        <p>* Pieza completa desde <span class="destacado">$675.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong> Caramelo, azafrán, Cuero, gamuza, haba tonka, Ámbar, vainilla, almizcle </p>
+        <p><strong>Proyección:</strong> Muy buena (6-8 hr)</p>
+        <p><strong>Dupe:</strong> Rosendo Mateu Nº5 &gt; +90% </p>
+      </div>
+      <select class="variante">
+  <option value="Decant 5ml - $55">Decant 5ml - $55</option>
+  <option value="Decant 10ml - $90">Decant 10ml - $90</option>
+  <option value="Pieza completa - $675">Pieza completa - $675</option>
+</select>
+
+<button class="btn-whatsapp" disabled style="opacity: 0.5; cursor: not-allowed;">Agotado</button>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('LATTAFA PRIDE ISHQ AL SHUYUKH GOLD', this)">Agregar al carrito</button>
+    </div>
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto arabes femeninos">
+      <img src="https://m.media-amazon.com/images/I/61TtlL5Yw0L._AC_.jpg" alt="LATTAFA YARA CANDY" />
+<div class="etiqueta-lanzamiento">Próximamente</div>
+
+      <h3>LATTAFA YARA CANDY</h3>
+      <div class="opciones">
+        <p>* Decant 5ml a solo <span class="destacado">$50.00</span></p>
+        <p>* Decant 10ml a solo <span class="destacado">$85.00</span></p>
+        <p>* Pieza completa desde <span class="destacado">$650.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong> Mandarina verde, grosella negra, caramelo de fresa, gardenia, Sándalo, jarabe de vainilla, almizcle, ámbar </p>
+        <p><strong>Proyección:</strong> Muy buena (6-8 hr)</p>
+        <p><strong>Dupe:</strong> Ariana Grande Sweet Like Candy &gt; +85% </p>
+      </div>
+      <select class="variante">
+  <option value="Decant 5ml - $50">Decant 5ml - $50</option>
+  <option value="Decant 10ml - $85">Decant 10ml - $85</option>
+  <option value="Pieza completa - $650">Pieza completa - $650</option>
+</select>
+
+<button class="btn-whatsapp" disabled style="opacity: 0.5; cursor: not-allowed;">Agotado</button>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('LATTAFA YARA CANDY', this)">Agregar al carrito</button>
+    </div>
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto arabes masculinos">
+      <img src="https://img.fragrancex.com/images/products/parent/medium/81004m.jpg" alt="MAISON ALHAMBRA PERSEUS MEN" />
+<div class="etiqueta-lanzamiento">Próximamente</div>
+
+      <h3>MAISON ALHAMBRA PERSEUS MEN</h3>
+      <div class="opciones">
+        <p>* Decant 5ml a solo <span class="destacado">$45.00</span></p>
+        <p>* Decant 10ml a solo <span class="destacado">$80.00</span></p>
+        <p>* Pieza completa desde <span class="destacado">$535.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong> Heliotropo, bergamota, comino, Almendra, lavanda, jazmín, Vainilla, ámbar, sándalo </p>
+        <p><strong>Proyección:</strong> Muy buena (6-8 hr)</p>
+        <p><strong>Dupe:</strong> Parfums de Marly Pegasus &gt; +85% </p>
+      </div>
+      <select class="variante">
+  <option value="Decant 5ml - $45">Decant 5ml - $45</option>
+  <option value="Decant 10ml - $80">Decant 10ml - $80</option>
+  <option value="Pieza completa - $535">Pieza completa - $535</option>
+</select>
+
+<button class="btn-whatsapp" disabled style="opacity: 0.5; cursor: not-allowed;">Agotado</button>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('MAISON ALHAMBRA PERSEUS MEN', this)">Agregar al carrito</button>
+    </div>
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto diseñador masculinos">
+      <img src="https://m.media-amazon.com/images/I/61NM4MBbUZL._UF1000%2C1000_QL80_.jpg" alt="NAUTICA VOYAGE" />
+<div class="etiqueta-lanzamiento">Próximamente</div>
+
+      <h3>NAUTICA VOYAGE</h3>
+      <div class="opciones">
+        <p>* Decant 5ml a solo <span class="destacado">$45.00</span></p>
+        <p>* Decant 10ml a solo <span class="destacado">$75.00</span></p>
+        <p>* Pieza completa desde <span class="destacado">$500.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong> Hojas verdes, manzana verde, Flor de loto, mimosa, Almizcle, cedro, musgo de roble, ámbar </p>
+        <p><strong>Proyección:</strong> Buena (4-8 hr)</p>
+        
+      </div>
+      <select class="variante">
+  <option value="Decant 5ml - $45">Decant 5ml - $45</option>
+  <option value="Decant 10ml - $75">Decant 10ml - $75</option>
+  <option value="Pieza completa - $500">Pieza completa - $500</option>
+</select>
+
+<button class="btn-whatsapp" disabled style="opacity: 0.5; cursor: not-allowed;">Agotado</button>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('NAUTICA VOYAGE', this)">Agregar al carrito</button>
+    </div>
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto diseñador femeninos">
+      <img src="https://m.media-amazon.com/images/I/61fPrknc3WL._UF1000%2C1000_QL80_.jpg" alt="PARIS HILTON GOLD RUSH" />
+<div class="etiqueta-lanzamiento">Próximamente</div>
+
+      <h3>PARIS HILTON GOLD RUSH</h3>
+      <div class="opciones">
+        <p>* Decant 5ml a solo <span class="destacado">$55.00</span></p>
+        <p>* Decant 10ml a solo <span class="destacado">$95.00</span></p>
+        <p>* Pieza completa desde <span class="destacado">$750.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong> Nectarina, limón (lima ácida), bergamota, Orquídea, violeta, pétalos de rosa, Praliné, vainilla y madera de cachemira. </p>
+        <p><strong>Proyección:</strong> Buena (4-8 hr)</p>
+        
+      </div>
+      <select class="variante">
+  <option value="Decant 5ml - $55">Decant 5ml - $55</option>
+  <option value="Decant 10ml - $95">Decant 10ml - $95</option>
+  <option value="Pieza completa - $750">Pieza completa - $750</option>
+</select>
+
+<button class="btn-whatsapp" disabled style="opacity: 0.5; cursor: not-allowed;">Agotado</button>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('PARIS HILTON GOLD RUSH', this)">Agregar al carrito</button>
+    </div>
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto diseñador femeninos">
+      <img src="https://tse2.mm.bing.net/th/id/OIP.NvCkkbY3J-xvaPpsloe-kQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="PARIS HILTON LUXE RUSH" />
+<div class="etiqueta-lanzamiento">Próximamente</div>
+
+      <h3>PARIS HILTON LUXE RUSH</h3>
+      <div class="opciones">
+        <p>* Decant 5ml a solo <span class="destacado">$55.00</span></p>
+        <p>* Decant 10ml a solo <span class="destacado">$95.00</span></p>
+        <p>* Pieza completa desde <span class="destacado">$775.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong> Bergamota siciliana, peonía rosa, Flor de tigre, tuberosa, frangipani, Pachulí, mousse de dulce de leche y sándalo </p>
+        <p><strong>Proyección:</strong> Muy Buena (6-10 hr)</p>
+        
+      </div>
+      <select class="variante">
+  <option value="Decant 5ml - $55">Decant 5ml - $55</option>
+  <option value="Decant 10ml - $95">Decant 10ml - $95</option>
+  <option value="Pieza completa - $775">Pieza completa - $775</option>
+</select>
+
+<button class="btn-whatsapp" disabled style="opacity: 0.5; cursor: not-allowed;">Agotado</button>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('PARIS HILTON LUXE RUSH', this)">Agregar al carrito</button>
+    </div>
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto diseñador femeninos">
+      <img src="https://tse2.mm.bing.net/th/id/OIP.NvCkkbY3J-xvaPpsloe-kQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="PARIS HILTON PINK RUSH" />
+<div class="etiqueta-lanzamiento">Próximamente</div>
+
+      <h3>PARIS HILTON PINK RUSH</h3>
+      <div class="opciones">
+        <p>* Decant 5ml a solo <span class="destacado">$55.00</span></p>
+        <p>* Decant 10ml a solo <span class="destacado">$95.00</span></p>
+        <p>* Pieza completa desde <span class="destacado">$735.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong> Bayas de goji, membrillo, pera nashi, bergamota, Osmanthus, hibisco, peonía rosa, rosa turca, vainilla, ámbar, almizcle, madera cachemir, haba tonka </p>
+        <p><strong>Proyección:</strong> Muy Buena (6-10 hr)</p>
+        
+      </div>
+      <select class="variante">
+  <option value="Decant 5ml - $55">Decant 5ml - $55</option>
+  <option value="Decant 10ml - $95">Decant 10ml - $95</option>
+  <option value="Pieza completa - $735">Pieza completa - $735</option>
+</select>
+
+<button class="btn-whatsapp" disabled style="opacity: 0.5; cursor: not-allowed;">Agotado</button>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('PARIS HILTON PINK RUSH', this)">Agregar al carrito</button>
+    </div>
+
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto diseñador femeninos">
+      <img src="https://m.media-amazon.com/images/I/71RVhJ-QolL._UF1000%2C1000_QL80_.jpg" alt="PARIS HILTON PLATINIUM RUSH" />
+<div class="etiqueta-lanzamiento">Próximamente</div>
+
+      <h3>PARIS HILTON PLATINIUM RUSH</h3>
+      <div class="opciones">
+        <p>* Decant 5ml a solo <span class="destacado">$55.00</span></p>
+        <p>* Decant 10ml a solo <span class="destacado">$95.00</span></p>
+        <p>* Pieza completa desde <span class="destacado">$735.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong> Mango, pera, manzana roja, Acordes verdes acuáticos, magnolia, lirio de los valles,flores frescas, Almizcle de cachemira, ámbar y pachulí</p>
+        <p><strong>Proyección:</strong> Muy Buena (6-10 hr)</p>
+        
+      </div>
+      <select class="variante">
+  <option value="Decant 5ml - $55">Decant 5ml - $55</option>
+  <option value="Decant 10ml - $95">Decant 10ml - $95</option>
+  <option value="Pieza completa - $735">Pieza completa - $735</option>
+</select>
+
+<button class="btn-whatsapp" disabled style="opacity: 0.5; cursor: not-allowed;">Agotado</button>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('PARIS HILTON PLATINIUM RUSH', this)">Agregar al carrito</button>
+    </div>
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto arabes masculinos">
+      <img src="https://tse1.mm.bing.net/th/id/OIP.5BtKVd9NA98KbfyPe-h4HQAAAA?rs=1&pid=ImgDetMain&o=7&rm=3" alt="RASASI HAWAS FOR MEN" />
+<div class="etiqueta-lanzamiento">Próximamente</div>
+
+      <h3>RASASI HAWAS FOR MEN</h3>
+      <div class="opciones">
+        <p>* Decant 5ml a solo <span class="destacado">$55.00</span></p>
+        <p>* Decant 10ml a solo <span class="destacado">$95.00</span></p>
+        <p>* Pieza completa desde <span class="destacado">$735.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong> Bergamota, limón, manzana verde, canela, Acordes acuáticos, ciruela, flor de azahar, cardamomo, Ámbar, almizcle, madera driftwood y pachulí  </p>
+        <p><strong>Proyección:</strong> Excelente (8-12 hr)</p>
+        <p><strong>Dupe:</strong> Invictus Aqua &gt; +90% </p>
+      </div>
+      <select class="variante">
+  <option value="Decant 5ml - $55">Decant 5ml - $55</option>
+  <option value="Decant 10ml - $95">Decant 10ml - $95</option>
+  <option value="Pieza completa - $735">Pieza completa - $735</option>
+</select>
+
+<button class="btn-whatsapp" disabled style="opacity: 0.5; cursor: not-allowed;">Agotado</button>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('RASASI HAWAS FOR MEN', this)">Agregar al carrito</button>
+    </div>
+
+
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto body femenino">
+     
+      <img src="https://labelleperfumes.com/cdn/shop/files/THANK-U-NEXT-2-0-ARIANA-GRANDE-BODY-MIST_large.webp?v=1722890213" alt="BODY MISS WOMAN ARIANA GRANDE TYN" />
+      <h3>BODY MISS WOMAN ARIANA GRANDE TYN</h3>
+      <div class="opciones">
+        <p>* Pieza completa desde <span class="destacado">$350.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong>Pera crujiente, pomelo rosado, frambuesa,Orquídea de vainilla, rosa, lirio de los valles, Malvavisco (marshmallow), almizcle cremoso, maderas blancas  </p>
+        <p><strong>Proyección:</strong> Buena (2-4 hr)</p>
+        
+      </div>
+      <select class="variante">
+  <option value="Pieza completa - $350">Pieza completa - $350</option>
+</select>
+
+<button class="btn-whatsapp" onclick="agregarAlCarrito('BODY MISS WOMAN ARIANA GRANDE TYN', this)">Agregar al carrito</button>
+    </div>
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto body femenino">
+      <img src="https://m.media-amazon.com/images/I/61ww0t2n5iL._UF1000%2C1000_QL80_.jpg" alt="BODY MISS WOMAN ARIANA GRANDE ARI" />
+<div class="etiqueta-agotado">Agotado</div>
+      <h3>BODY MISS WOMAN ARIANA GRANDE ARI</h3>
+      <div class="opciones">
+        <p>* Pieza completa desde <span class="destacado">$350.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong>Frambuesa, pera, pomelo rosado, orquídea de vainilla, rosa, lirio de los valles, malvavisco, almizcle, maderas blancas  </p>
+        <p><strong>Proyección:</strong> Buena (2-4 hr)</p>
+        
+      </div>
+      <select class="variante">
+  <option value="Pieza completa - $350">Pieza completa - $350</option>
+</select>
+
+<button class="btn-whatsapp" disabled style="opacity: 0.5; cursor: not-allowed;">Agotado</button>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('BODY MISS WOMAN ARIANA GRANDE ARI', this)">Agregar al carrito</button>
+    </div>
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto body femenino">
+      <img src="https://m.media-amazon.com/images/I/61Uc8qoY80L._UF1000%2C1000_QL80_.jpg" alt="BODY MISS WOMAN ARIANA GRANDE CLOUD" />
+<div class="etiqueta-agotado">Agotado</div>
+      <h3>BODY MISS WOMAN ARIANA GRANDE CLOUD</h3>
+      <div class="opciones">
+        <p>* Pieza completa desde <span class="destacado">$350.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong>Lavanda, pera, bergamota, crema batida, coco, praline, orquídea de vainilla, almizcle, maderas blancas, </p>
+        <p><strong>Proyección:</strong> Buena (2-4 hr)</p>
+        
+      </div>
+      <select class="variante">
+  <option value="Pieza completa - $350">Pieza completa - $350</option>
+</select>
+
+<button class="btn-whatsapp" disabled style="opacity: 0.5; cursor: not-allowed;">Agotado</button>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('BODY MISS WOMAN ARIANA GRANDE CLOUD', this)">Agregar al carrito</button>
+    </div>
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto body femenino">
+      <img src="https://i5.walmartimages.com/seo/Ariana-Grande-God-Is-A-Woman-Body-Mist-8-0-oz_acbef75d-1a70-4ac6-ae82-93f6b146cb92.d31ad7e10c0fd6d47b1a0d63d9f8bafc.jpeg?odnBg=FFFFFF&odnHeight=768&odnWidth=768" alt="BODY MISS WOMAN ARIANA GRANDE GOOD IS WOMAN" />
+      <h3>BODY MISS WOMAN ARIANA GRANDE GOOD IS WOMAN</h3>
+      <div class="opciones">
+        <p>* Pieza completa desde <span class="destacado">$350.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong>Pera crujiente, almizcle ambreta, Rosa turca, raíz de lirio (orris),Vainilla de Madagascar, madera de sándalo </p>
+        <p><strong>Proyección:</strong> Buena (2-4 hr)</p>
+        
+      </div>
+      <select class="variante">
+  <option value="Pieza completa - $350">Pieza completa - $350</option>
+</select>
+
+<button class="btn-whatsapp" onclick="agregarAlCarrito('BODY MISS WOMAN ARIANA GRANDE GOOD IS WOMAN', this)">Agregar al carrito</button>
+    </div>
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto body femenino">
+      <img src="https://m.media-amazon.com/images/I/61FJVghwjfL._UF1000%2C1000_QL80_.jpg" alt="BODY MISS WOMAN ARIANA GRANDE MOON LIGHT" />
+      <h3>BODY MISS WOMAN ARIANA GRANDE MOON LIGHT</h3>
+      <div class="opciones">
+        <p>* Pieza completa desde <span class="destacado">$350.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong>Ciruela, Grosella negra, malvavisco,Peonía, vainilla, sándalo, ámbar </p>
+        <p><strong>Proyección:</strong> Buena (2-4 hr)</p>
+        
+      </div>
+      <select class="variante">
+  <option value="Pieza completa - $350">Pieza completa - $350</option>
+</select>
+
+<button class="btn-whatsapp" onclick="agregarAlCarrito('BODY MISS WOMAN ARIANA GRANDE MOON LIGHT', this)">Agregar al carrito</button>
+    </div>
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto body femenino">
+      <img src="https://m.media-amazon.com/images/I/414v6uvycxL.jpg" alt="BODY MISS WOMAN ARIANA GRANDE SWEET LIKE CANDY" />
+<div class="etiqueta-agotado">Agotado</div>
+      <h3>BODY MISS WOMAN ARIANA GRANDE SWEET LIKE CANDY</h3>
+      <div class="opciones">
+        <p>* Pieza completa desde <span class="destacado">$350.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong>Zarzamora, pera, bergamota, crema batida, malvavisco, grosellas negras, frangipani, jazmín, madreselva,nvainilla, madera de cachemira </p>
+        <p><strong>Proyección:</strong> Buena (2-4 hr)</p>
+        
+      </div>
+      <select class="variante">
+  <option value="Pieza completa - $350">Pieza completa - $350</option>
+</select>
+
+<button class="btn-whatsapp" disabled style="opacity: 0.5; cursor: not-allowed;">Agotado</button>
+<button class="btn-whatsapp" onclick="agregarAlCarrito('BODY MISS WOMAN ARIANA GRANDE SWEET LIKE CANDY', this)">Agregar al carrito</button>
+    </div>
+
+<!-- PRODUCTOS AQUÍ (igual que antes) -->
+
+    <div class="producto body femenino">
+     
+      <img src="https://tse1.explicit.bing.net/th/id/OIP.aDxqeCDZYisoFBUZ7M4ikAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="BODY ROSÉ RUSH PARIS HILTON" />
+      <h3>BODY ROSÉ RUSH PARIS HILTON</h3>
+      <div class="opciones">
+        <p>* Pieza completa desde <span class="destacado">$250.00</span></p>
+      </div>
+      <div class="notas">
+        <p><strong>Notas:</strong> Pétalos de rosa, lichi, neroli, rosa de mayo, peonía, papaya, Ámbar, almizcle blanco y cedro </p>
+        <p><strong>Proyección:</strong> Buena (2-4 hr)</p>
+        
+      </div>
+      <select class="variante">
+  <option value="Pieza completa - $250">Pieza completa - $250</option>
+</select>
+
+<button class="btn-whatsapp" onclick="agregarAlCarrito('BODY ROSÉ RUSH PARIS HILTON', this)">Agregar al carrito</button>
+    </div>
+
+
+    <!-- Agrega más productos aquí -->
+  </section>
+
+<!-- 🛒 Carrito lateral -->
+<div class="carrito" id="carrito">
+  <h3>🛒 Tu carrito</h3>
+  <ul id="lista-carrito"></ul>
+  <p><strong>Total: $<span id="total">0</span></strong></p>
+  <a id="btn-whatsapp" class="btn-finalizar" href="#" target="_blank">Finalizar pedido por WhatsApp</a>
+</div>
+
+  <script>
+    function filtrarProductos(categoria) {
+      const productos = document.querySelectorAll('.producto');
+      productos.forEach(prod => {
+        prod.style.display = (categoria === 'todos' || prod.classList.contains(categoria)) ? 'block' : 'none';
+      });
+    }
+  </script>
+
+<script>
+  let carrito = [];
+
+  function agregarAlCarrito(producto, btn) {
+    const select = btn.previousElementSibling;
+    const varianteTexto = select.value;
+    const precio = parseFloat(varianteTexto.match(/\$(\d+)/)[1]);
+    carrito.push({ producto, variante: varianteTexto, precio });
+
+    renderizarCarrito();
+  }
+
+  function renderizarCarrito() {
+    const lista = document.getElementById('lista-carrito');
+    const totalSpan = document.getElementById('total');
+    const whatsappBtn = document.getElementById('btn-whatsapp');
+
+    lista.innerHTML = '';
+    let total = 0;
+    let mensaje = "Hola, quiero pedir:\n";
+
+    carrito.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = `• ${item.producto} (${item.variante})`;
+      lista.appendChild(li);
+      total += item.precio;
+      mensaje += `- ${item.producto} (${item.variante})\n`;
+    });
+
+    totalSpan.textContent = total;
+    mensaje += `Total: $${total}`;
+
+    const telefono = "5218333468655"; // Reemplaza con tu número
+    const mensajeEncoded = encodeURIComponent(mensaje);
+    whatsappBtn.href = `https://wa.me/${telefono}?text=${mensajeEncoded}`;
+  }
+function toggleCarrito() {
+  const carrito = document.getElementById('carrito');
+  carrito.style.display = carrito.style.display === 'none' ? 'block' : 'none';
+}
+</script>
+</body>
+<button class="toggle-carrito" onclick="toggleCarrito()">🛒 Ver carrito</button>
+</html>
+  </section>
+<!-- ****para quitarlos como agotado ***<div class="etiqueta-agotado">Agotado</div>***<button class="btn-whatsapp" disabled style="opacity: 0.5; cursor: not-allowed;">Agotado</button>***<div class="etiqueta-envio">¡Envío Gratis!</div> -->
+</body>
+</html>
+<div class="carrito" id="carrito" style="display: none;">
+
