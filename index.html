@@ -349,6 +349,42 @@
 .btn-finalizar:hover {
   background: #1ebe5d;
 }
+    .precio-original {
+    text-decoration: line-through;
+    color: gray;
+    margin-right: 5px;
+  }
+
+  .precio-rebajado {
+    color: green;
+    font-weight: bold;
+  }
+
+  .imagen-con-descuento {
+    position: relative;
+    display: inline-block;
+  }
+
+  .etiqueta-descuento {
+    position: absolute;
+    top: 250px;
+    left: 10px;
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    font-size: 13px;
+    border-radius: 5px;
+    font-weight: bold;
+ 
+  }
+
+  #lista-carrito button {
+    background: none;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
   </style>
 </head>
 <body>
@@ -362,7 +398,7 @@
     <img src="https://media-mty2-1.cdn.whatsapp.net/v/t61.24694-24/514485800_1894496768036191_2819527431329943197_n.jpg?ccb=11-4&oh=01_Q5Aa2AECCrdQmgtcvtiWBK6rnjn6hzCSpBC1rfulOyrLj8JHVA&oe=68860713&_nc_sid=5e03e0&_nc_cat=105" alt="Logo Fashion Store" class="logo" />
     <div class="eslogan">¡Descubre el aroma que marca tu estilo!</div>
     <div class="info">
-      <div>🔝 Promociones nuevas cada semana 🔝</div>
+      <div>🔝 20% OFF en productos selecionados 🔝</div>
       <div>🚚 Costos de envíos nacionales desde $120</div>
       <div>🎁Envío gratis Incluyen 1 decant de regalo🎁</div>
       <div>💳 Pagos con tarjeta y MSI</div>
@@ -397,20 +433,21 @@
 <div class="etiqueta-envio">Pieza completa ¡Envío Gratis!</div>
       <img src="https://cdn.fragrancenet.com/images/photos/900x900/299207.jpg" alt="AFNAN SUPREMACY PINK WOMAN" />
       <h3>AFNAN SUPREMACY PINK WOMAN</h3>
+      <span class="etiqueta-descuento">20% OFF</span>
       <div class="opciones">
         <p>* Decant 5ml a solo <span class="destacado">$60.00</span></p>
         <p>* Decant 10ml a solo <span class="destacado">$100.00</span></p>
-        <p>* Pieza completa desde <span class="destacado">$799.00</span></p>
+       <p>* Pieza completa desde <span class="precio-original">$849.00</span> <span class="precio-rebajado" data-precio-rebajado="679.20">$679.20</span></p>
       </div>
       <div class="notas">
         <p><strong>Notas:</strong> Pimienta rosa, Violeta, Rosa, Peonía, Muguet, Ámbar y Almizcle</p>
         <p><strong>Proyección:</strong> Muy buena (6-7 hr)</p>
-        <p><strong>Dupe:</strong> Estilo Propio &gt;</p>
+        <p><strong>Dupe:</strong> Estilo Propio </p>
       </div>
       <select class="variante">
   <option value="Decant 5ml - $60">Decant 5ml - $60</option>
   <option value="Decant 10ml - $100">Decant 10ml - $100</option>
-  <option value="Pieza completa - $799">Pieza completa - $799</option>
+  <option value="Pieza completa - $849">Pieza completa - $679.20</option>
 </select>
 <button class="btn-whatsapp" onclick="agregarAlCarrito('AFNAN SUPREMACY PINK WOMAN', this)">Agregar al carrito</button>
     </div>
@@ -421,20 +458,21 @@
 <div class="etiqueta-envio">Pieza completa ¡Envío Gratis!</div>
       <img src="https://orioudh.com/cdn/shop/files/arabian-perfume-afnan-supremacy-purple-100ml-eau-de-parfum-afnan-307332-51370441310539.jpg?v=1724768293&width=490" alt="AFNAN SUPREMACY PURPLE WOMAN" />
       <h3>AFNAN SUPREMACY PURPLE WOMAN</h3>
+      <span class="etiqueta-descuento">20% OFF</span>
       <div class="opciones">
         <p>* Decant 5ml a solo <span class="destacado">$60.00</span></p>
         <p>* Decant 10ml a solo <span class="destacado">$100.00</span></p>
-        <p>* Pieza completa desde <span class="destacado">$799.00</span></p>
+        <p>* Pieza completa desde <span class="precio-original">$849.00</span> <span class="precio-rebajado" data-precio-rebajado="679.20">$679.20</span></p>
       </div>
       <div class="notas">
         <p><strong>Notas:</strong> Naranja, Bergamota, Melocotón, Ámbar, Almizcle blanco, Pera, Almizcle, Vainilla  </p>
         <p><strong>Proyección:</strong> Muy buena (6-8 hr)</p>
-        <p><strong>Dupe:</strong> Estilo Propio &gt;</p>
+        <p><strong>Dupe:</strong> Estilo Propio </p>
       </div>
       <select class="variante">
   <option value="Decant 5ml - $60">Decant 5ml - $60</option>
   <option value="Decant 10ml - $100">Decant 10ml - $100</option>
-  <option value="Pieza completa - $799">Pieza completa - $799</option>
+  <option value="Pieza completa - $849">Pieza completa - $679.20</option>
 </select>
 <button class="btn-whatsapp" onclick="agregarAlCarrito('AFNAN SUPREMACY PURPLE WOMAN', this)">Agregar al carrito</button>
     </div>
@@ -1333,11 +1371,40 @@
 <script>
   let carrito = [];
 
-  function agregarAlCarrito(producto, btn) {
-    const select = btn.previousElementSibling;
+  function agregarAlCarrito(nombreProducto, btn) {
+    const contenedor = btn.closest('.producto');
+    const select = contenedor.querySelector('.variante');
     const varianteTexto = select.value;
-    const precio = parseFloat(varianteTexto.match(/\$(\d+)/)[1]);
-    carrito.push({ producto, variante: varianteTexto, precio });
+
+    let precio = 0;
+
+    // Si es "Pieza completa", busca si hay rebaja
+    if (varianteTexto.includes('Pieza completa')) {
+      const precioRebajadoElem = contenedor.querySelector('.precio-rebajado');
+      precio = precioRebajadoElem
+        ? parseFloat(precioRebajadoElem.dataset.precioRebajado)
+        : parseFloat(varianteTexto.match(/\$(\d+)/)[1]);
+    } else {
+      // Precio normal para 5ml / 10ml
+      const match = varianteTexto.match(/\$(\d+)/);
+      precio = match ? parseFloat(match[1]) : 0;
+    }
+
+    // Verificar si ya está en el carrito
+    const index = carrito.findIndex(
+      item => item.producto === nombreProducto && item.variante === varianteTexto
+    );
+
+    if (index !== -1) {
+      carrito[index].cantidad += 1;
+    } else {
+      carrito.push({
+        producto: nombreProducto,
+        variante: varianteTexto,
+        precio: precio,
+        cantidad: 1
+      });
+    }
 
     renderizarCarrito();
   }
@@ -1351,25 +1418,34 @@
     let total = 0;
     let mensaje = "Hola, quiero pedir:\n";
 
-    carrito.forEach(item => {
+    carrito.forEach((item, index) => {
       const li = document.createElement('li');
-      li.textContent = `• ${item.producto} (${item.variante})`;
+      li.innerHTML = `
+        • ${item.producto} (${item.variante}) x${item.cantidad}
+        <button onclick="eliminarDelCarrito(${index})" style="margin-left: 10px; color: red;">✖</button>
+      `;
       lista.appendChild(li);
-      total += item.precio;
-      mensaje += `- ${item.producto} (${item.variante})\n`;
+      total += item.precio * item.cantidad;
+      mensaje += `- ${item.producto} (${item.variante}) x${item.cantidad}\n`;
     });
 
-    totalSpan.textContent = total;
-    mensaje += `Total: $${total}`;
+    totalSpan.textContent = total.toFixed(2);
+    mensaje += `Total: $${total.toFixed(2)}`;
 
-    const telefono = "5218333468655"; // Reemplaza con tu número
+    const telefono = "5218333468655"; // <-- Tu número aquí
     const mensajeEncoded = encodeURIComponent(mensaje);
     whatsappBtn.href = `https://wa.me/${telefono}?text=${mensajeEncoded}`;
   }
-function toggleCarrito() {
-  const carrito = document.getElementById('carrito');
-  carrito.style.display = carrito.style.display === 'none' ? 'block' : 'none';
-}
+
+  function eliminarDelCarrito(index) {
+    carrito.splice(index, 1);
+    renderizarCarrito();
+  }
+
+  function toggleCarrito() {
+    const carrito = document.getElementById('carrito');
+    carrito.style.display = carrito.style.display === 'none' ? 'block' : 'none';
+  }
 </script>
 </body>
 <button class="toggle-carrito" onclick="toggleCarrito()">🛒 Ver carrito</button>
