@@ -1467,18 +1467,6 @@
       const etiquetaAgotado = producto.querySelector('.etiqueta-agotado');
       const boton = producto.querySelector('.btn-whatsapp');
 
-      // Obtener textos (si existen)
-  const textos = [
-    etiquetaLanzamiento ? etiquetaLanzamiento.textContent.trim().toLowerCase() : '',
-    etiquetaAgotado ? etiquetaAgotado.textContent.trim().toLowerCase() : ''
-  ];
-
-      if (textos.some(texto => texto.includes('agotado') || texto.includes('próximamente'))) {
-    boton.disabled = true;
-    boton.style.cursor = 'not-allowed';
-    boton.style.opacity = 0.5;  // También baja la opacidad para dar feedback visual
-  }
-});
       if (etiqueta) {
         const texto = etiqueta.textContent.trim().toLowerCase();
         if (texto.includes('agotado') || texto.includes('próximamente')) {
