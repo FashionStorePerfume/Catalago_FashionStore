@@ -1388,14 +1388,22 @@
 
     // Si es "Pieza completa", busca si hay rebaja
     if (varianteTexto.includes('Pieza completa')) {
-    const precioRebajadoElem = contenedor.querySelector('.precio-rebajado');
-    precio = precioRebajadoElem
-      ? parseFloat(precioRebajadoElem.dataset.precioRebajado)
-      : parseFloat(varianteTexto.match(/\$(\d+)/)[1]);
+  const precioRebajadoElem = contenedor.querySelector('.precio-rebajado');
+  if (precioRebajadoElem) {
+    precio = parseFloat(precioRebajadoElem.dataset.precioRebajado);
   } else {
-    const match = varianteTexto.match(/\$(\d+)/);
-    precio = match ? parseFloat(match[1]) : 0;
+    const match = varianteTexto.match(/\$([\d,.]+)/);
+    if (match) {
+      // Quitar comas y convertir a número
+      precio = parseFloat(match[1].replace(/,/g, ''));
+    } else {
+      precio = 0;
+    }
   }
+} else {
+  const match = varianteTexto.match(/\$([\d,.]+)/);
+  precio = match ? parseFloat(match[1].replace(/,/g, '')) : 0;
+}
 
     // Verificar si ya está en el carrito
     const index = carrito.findIndex(
