@@ -1376,42 +1376,47 @@
   let carrito = [];
 
   function agregarAlCarrito(nombreProducto, btn) {
-    const contenedor = btn.closest('.producto');
-    const select = contenedor.querySelector('.variante');
-    const varianteTexto = select.value;
+  const contenedor = btn.closest('.producto');
+  const select = contenedor.querySelector('.variante');
+  const varianteTexto = select.value;
+
+    // Validar si está agotado o en espera
+  if (varianteTexto.toLowerCase().includes('agotado') || varianteTexto.toLowerCase().includes('próximamente')) {
+    alert('Este producto no está disponible actualmente.');
+    return;
+  }
 
     let precio = 0;
 
     // Si es "Pieza completa", busca si hay rebaja
     if (varianteTexto.includes('Pieza completa')) {
-      const precioRebajadoElem = contenedor.querySelector('.precio-rebajado');
-      precio = precioRebajadoElem
-        ? parseFloat(precioRebajadoElem.dataset.precioRebajado)
-        : parseFloat(varianteTexto.match(/\$(\d+)/)[1]);
-    } else {
-      // Precio normal para 5ml / 10ml
-      const match = varianteTexto.match(/\$(\d+)/);
-      precio = match ? parseFloat(match[1]) : 0;
-    }
+    const precioRebajadoElem = contenedor.querySelector('.precio-rebajado');
+    precio = precioRebajadoElem
+      ? parseFloat(precioRebajadoElem.dataset.precioRebajado)
+      : parseFloat(varianteTexto.match(/\$(\d+)/)[1]);
+  } else {
+    const match = varianteTexto.match(/\$(\d+)/);
+    precio = match ? parseFloat(match[1]) : 0;
+  }
 
     // Verificar si ya está en el carrito
     const index = carrito.findIndex(
-      item => item.producto === nombreProducto && item.variante === varianteTexto
-    );
+    item => item.producto === nombreProducto && item.variante === varianteTexto
+  );
 
-    if (index !== -1) {
-      carrito[index].cantidad += 1;
-    } else {
-      carrito.push({
-        producto: nombreProducto,
-        variante: varianteTexto,
-        precio: precio,
-        cantidad: 1
-      });
-    }
-
-    renderizarCarrito();
+  if (index !== -1) {
+    carrito[index].cantidad += 1;
+  } else {
+    carrito.push({
+      producto: nombreProducto,
+      variante: varianteTexto,
+      precio: precio,
+      cantidad: 1
+    });
   }
+
+  renderizarCarrito();
+}
 
   function renderizarCarrito() {
     const lista = document.getElementById('lista-carrito');
