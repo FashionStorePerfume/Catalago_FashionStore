@@ -814,10 +814,9 @@
       <select class="variante">
   <option value="Decant 5ml - $90">Decant 5ml - $90</option>
   <option value="Decant 10ml - $165">Decant 10ml - $165</option>
-  <option value="Pieza completa - $1,405">Pieza completa - $1,405</option>
+  <option value="Pieza completa - $1,405">Pieza completa - $1405</option>
 </select>
 
-<button class="btn-whatsapp" disabled style="opacity: 0.5; cursor: not-allowed;">Agotado</button>
 <button class="btn-whatsapp" onclick="agregarAlCarrito('BHARARA KING', this)">Agregar al carrito</button>
     </div>
 
@@ -844,7 +843,6 @@
   <option value="Pieza completa - $650">Pieza completa - $650</option>
 </select>
 
-<button class="btn-whatsapp" disabled style="opacity: 0.5; cursor: not-allowed;">Agotado</button>
 <button class="btn-whatsapp" onclick="agregarAlCarrito('EMPER STALLION 53', this)">Agregar al carrito</button>
     </div>
 
@@ -871,7 +869,7 @@
   <option value="Pieza completa - $920">Pieza completa - $920</option>
 </select>
 
-<button class="btn-whatsapp" disabled style="opacity: 0.5; cursor: not-allowed;">Agotado</button>
+
 <button class="btn-whatsapp" onclick="agregarAlCarrito('LATTAFA AFEEF UNISEX', this)">Agregar al carrito</button>
     </div>
 
@@ -1381,7 +1379,7 @@
   const varianteTexto = select.value;
 
     // Validar si está agotado o en espera
-  if (varianteTexto.toLowerCase().includes('agotado') || varianteTexto.toLowerCase().includes('próximamente')) {
+  if (varianteTexto.toLowerCase().includes('Agotado') || varianteTexto.toLowerCase().includes('Próximamente')) {
     alert('Este producto no está disponible actualmente.');
     return;
   }
