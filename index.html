@@ -1392,16 +1392,15 @@
   if (precioRebajadoElem) {
     precio = parseFloat(precioRebajadoElem.dataset.precioRebajado);
   } else {
-    const match = varianteTexto.match(/\$([\d,.]+)/);
+    const match = varianteTexto.match(/\$([\d,\.]+)/); // Escapar punto
     if (match) {
-      // Quitar comas y convertir a número
-      precio = parseFloat(match[1].replace(/,/g, ''));
+      precio = parseFloat(match[1].replace(/,/g, '')); // Elimina comas
     } else {
       precio = 0;
     }
   }
 } else {
-  const match = varianteTexto.match(/\$([\d,.]+)/);
+  const match = varianteTexto.match(/\$([\d,\.]+)/);
   precio = match ? parseFloat(match[1].replace(/,/g, '')) : 0;
 }
 
