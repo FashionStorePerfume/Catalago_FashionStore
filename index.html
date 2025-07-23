@@ -1457,14 +1457,12 @@
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.producto').forEach(producto => {
       const etiqueta = producto.querySelector('.etiqueta-lanzamiento');
-      const boton = producto.querySelector('.btn-agregar');
+      const boton = producto.querySelector('.btn-whatsapp');
 
       if (etiqueta) {
         const texto = etiqueta.textContent.trim().toLowerCase();
         if (texto.includes('Agotado') || texto.includes('Próximamente')) {
           boton.disabled = true;
-          boton.textContent = texto.charAt(0).toUpperCase() + texto.slice(1); // Cambia texto del botón
-          boton.style.opacity = 0.5;
           boton.style.cursor = 'not-allowed';
         }
       }
