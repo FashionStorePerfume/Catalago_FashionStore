@@ -1474,6 +1474,13 @@
           boton.style.cursor = 'not-allowed';
           boton.style.opacity = 0.5;
         }
+        if (etiquetaAgotado) {
+        const texto = etiqueta.textContent.trim().toLowerCase();
+        if (texto.includes('agotado') || texto.includes('próximamente')) {
+          boton.disabled = true;
+          boton.style.cursor = 'not-allowed';
+          boton.style.opacity = 0.5;
+        }
       }
     });
   });
