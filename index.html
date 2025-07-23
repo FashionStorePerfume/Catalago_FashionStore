@@ -1462,19 +1462,15 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.producto').forEach(producto => {
-      const etiqueta = producto.querySelector('.etiqueta-lanzamiento');
-      const etiquetaAgotado = producto.querySelector('.etiqueta-agotado');
-      const boton = producto.querySelector('.btn-whatsapp');
+  document.querySelectorAll('.producto').forEach(producto => {
+    const etiquetas = [
+      producto.querySelector('.etiqueta-lanzamiento'),
+      producto.querySelector('.etiqueta-agotado')
+    ];
+    const boton = producto.querySelector('.btn-whatsapp');
 
+    etiquetas.forEach(etiqueta => {
       if (etiqueta) {
-        const texto = etiqueta.textContent.trim().toLowerCase();
-        if (texto.includes('agotado') || texto.includes('próximamente')) {
-          boton.disabled = true;
-          boton.style.cursor = 'not-allowed';
-          boton.style.opacity = 0.5;
-        }
-        if (etiquetaAgotado) {
         const texto = etiqueta.textContent.trim().toLowerCase();
         if (texto.includes('agotado') || texto.includes('próximamente')) {
           boton.disabled = true;
@@ -1484,6 +1480,7 @@
       }
     });
   });
+});
   
 </script>
   <button class="toggle-carrito" onclick="toggleCarrito()">🛒 Ver carrito</button>
